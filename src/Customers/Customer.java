@@ -29,6 +29,16 @@ public  abstract class Customer {
         return idCus;
     }
 
+    // Set insuranceCard for Customer
+    public boolean setInsuranceCard(InsuranceCard insuranceCard) {
+        if (insuranceCard == null) {
+            this.insuranceCard = insuranceCard;
+            return true;
+        }
+        System.out.println("You have already owned an insuranceCard");
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +

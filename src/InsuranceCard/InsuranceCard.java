@@ -28,6 +28,36 @@ public class InsuranceCard {
         return cardNum;
     }
 
+
+    //Set cardHolder for InsuanceCard
+    public boolean setCardHolder(Customer cus) {
+        if (cardHolder == null) {
+            this.cardHolder = cus;
+            return true;
+        }
+        System.out.println("This card has already been owned an customer");
+        return  false;
+    }
+
+    public boolean setExpirationDate(Date NewExpirationDate) {
+        if (expirationDate == null) {
+            this.expirationDate = NewExpirationDate;
+           return true;
+        }
+        System.out.println("ExpirationDate has already set");
+        return false;
+    }
+
+    //Set PolicyOwner for InsuanceCard
+    public boolean setPolicyOwner(PolicyOwner owner) {
+        if (owner == null) {
+            this.policyOwner = owner;
+            return true;
+        }
+        System.out.println("This card has already been had an PolicyOwner");
+        return  false;
+    }
+
     @Override
     public String toString() {
         return "InsuranceCard{" +
