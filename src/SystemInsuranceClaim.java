@@ -27,8 +27,8 @@ public class SystemInsuranceClaim implements ProcessManage {
         Customer cus2 = new Dependent("02","Pham Quang Huy");
         InsuranceCard card1 = new InsuranceCard("0321146326");
         InsuranceCard card2 = new InsuranceCard("0545246418");
-        Claim claim1 = new Claim("99", "document", 90.0);
-        Claim claim2 = new Claim("98", "document1",  91.0);
+        Claim claim1 = new Claim("99", 90.0);
+        Claim claim2 = new Claim("98",  91.0);
         Bank bank = new Bank("VCB", "UNG XUAN DAT", "1019687234");
         Bank bank1 = new Bank("MB", "Pham Quang Huy", "1019687234");
         Date date = new Date();
@@ -39,8 +39,15 @@ public class SystemInsuranceClaim implements ProcessManage {
         claim1.setInforBank(bank);
         cus1.setInsuranceCard(card1);/// add insuranceCard
         ((PolicyHolder)cus1).addClaim(claim1);
+        ((PolicyHolder)cus1).addClaim(claim2);
+        cus1.displayDetailInsuranceCard();
         //((PolicyHolder)cus1).addClaim(claim2);
         System.out.println(cus1);
+        System.out.println(card1);
+        claim1.setCardNum();
+        claim2.setCardNum();
+        cus1.displayClaim();
+
 
     }
     @Override
@@ -62,7 +69,6 @@ public class SystemInsuranceClaim implements ProcessManage {
     public void getAll() {
 
     }
-
     @Override
     public void getOne() {
 

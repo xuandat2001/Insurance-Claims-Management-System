@@ -10,6 +10,7 @@ import java.util.Date;
 public class Claim {
     private String idClaim;
     private LocalDate claimDate;
+    private String cardNumber;
     private Customer insuredPerson;
     private LocalDate examDate;
     private String listOfDoc;
@@ -17,15 +18,10 @@ public class Claim {
     private Status status;
     private Bank inforBank;
 
-    public Claim(String idClaim, String listOfDoc, double claimAmount) {
+    public Claim(String idClaim, Double claimAmount) {
         this.idClaim = idClaim;
-        this.claimDate = null;
-        this.insuredPerson = new Customer() {};
-        this.examDate = null;
-        this.listOfDoc = listOfDoc;
         this.claimAmount = claimAmount;
-        this.status = Status.PROCESSING;
-        this.inforBank = null;
+
     }
 
     public Claim() {
@@ -82,13 +78,16 @@ public class Claim {
         }
         return false;
     }
-
+    public void setCardNum(){
+        this.cardNumber = insuredPerson.getInsuranceCard().getCardNum();
+    }
     @Override
     public String toString() {
         return "Claim{" +
                 "idClaim='" + idClaim + '\'' +
                 ", claimDate=" + claimDate +
-                ", insuredPerson=" + insuredPerson +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", insuredPerson=" + insuredPerson.getFullNameCus() +
                 ", examDate=" + examDate +
                 ", listOfDoc='" + listOfDoc + '\'' +
                 ", claimAmount=" + claimAmount +

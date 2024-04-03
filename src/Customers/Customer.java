@@ -14,14 +14,13 @@ public  abstract class Customer {
     public Customer(String idCus, String fullNameCus) {
         this.idCus = idCus;
         this.fullNameCus = fullNameCus;
-        this.insuranceCard = new InsuranceCard();
         this.listOfClaims = new ArrayList<Claim>();
     }
 
     public Customer() {
         this.idCus = null;
         this.fullNameCus = null;
-        this.insuranceCard = new InsuranceCard();
+        this.insuranceCard = null;
         this.listOfClaims = null;
     }
 
@@ -45,30 +44,50 @@ public  abstract class Customer {
     public InsuranceCard getInsuranceCard() {
         return insuranceCard;
     }
+    public boolean isOwnedInsuranceCard(){
+        return this.getInsuranceCard() != null;
+    }
+
+
 
     // Set insuranceCard for Customer
     public boolean setInsuranceCard(InsuranceCard newInsuranceCard) {
-            if (insuranceCard == null) {
+            if (!isOwnedInsuranceCard() && newInsuranceCard.getCardHolder() == null) {
+                this.insuranceCard = newInsuranceCard;
+                newInsuranceCard.setCardHolder(this);
+                return true;
+            }
+            System.out.println("here");
+            return false;
 
-            this.insuranceCard = newInsuranceCard;
-            newInsuranceCard.setCardHolder(this);
-            return true;
-        }
-        System.out.println("You have already owned an insuranceCard");
-        return false;
+    }
+
+
+
+    public void displayDetailInsuranceCard(){
+        System.out.println(insuranceCard);
     }
 
     public boolean addClaim(Claim claim){
+        if (listOfClaims.contains(claim)){
+            return false;
+        }
         listOfClaims.add(claim);
+        claim.setInsuredPerson(this);
         return true;
+    }
+
+
+    public void displayClaim(){
+        for (Claim claim : listOfClaims){
+            System.out.println(claim);
+        }
     }
     @Override
     public String toString() {
         return "Customer{" +
                 "idCus='" + idCus + '\'' +
                 ", fullNameCus='" + fullNameCus + '\'' +
-                ", insuranceCard=" + insuranceCard +
-                ", listOfClaims=" + listOfClaims +
                 '}';
     }
 }

@@ -12,9 +12,6 @@ public class InsuranceCard {
 
     public InsuranceCard(String cardNum) {
         this.cardNum = cardNum;
-        this.cardHolder = new Customer() {};
-        this.policyOwner = null;
-        this.expirationDate = null;
     }
 
     public InsuranceCard() {
@@ -61,8 +58,8 @@ public class InsuranceCard {
     public String toString() {
         return "InsuranceCard{" +
                 "cardNum='" + cardNum + '\'' +
-                ", cardHolder=" + cardHolder.getFullNameCus() +
-                ", policyOwner=" + policyOwner.getFullNamePolicyOwner() +
+                ", cardHolder=" + cardHolder +
+                ", policyOwner=" + policyOwner +
                 ", expirationDate=" + expirationDate +
                 '}';
     }
