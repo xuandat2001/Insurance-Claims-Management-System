@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+       SystemInsuranceClaim sys1 = new SystemInsuranceClaim();
+       sys1.Test();
     }
 }

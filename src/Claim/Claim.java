@@ -4,27 +4,28 @@ import Customers.Customer;
 import Customers.Dependent;
 import Customers.PolicyHolder;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Claim {
     private String idClaim;
-    private Date claimDate;
-    private Object insuredPerson;
-    private Date examDate;
+    private LocalDate claimDate;
+    private Customer insuredPerson;
+    private LocalDate examDate;
     private String listOfDoc;
     private Double claimAmount;
     private Status status;
     private Bank inforBank;
 
-    public Claim(String idClaim, Date claimDate, Object insuredPerson, Date examDate, String listOfDoc, double claimAmount, Status status, Bank inforBank) {
+    public Claim(String idClaim, String listOfDoc, double claimAmount) {
         this.idClaim = idClaim;
-        this.claimDate = claimDate;
-        this.insuredPerson = insuredPerson;
-        this.examDate = examDate;
+        this.claimDate = null;
+        this.insuredPerson = new Customer() {};
+        this.examDate = null;
         this.listOfDoc = listOfDoc;
         this.claimAmount = claimAmount;
-        this.status = status;
-        this.inforBank = inforBank;
+        this.status = Status.PROCESSING;
+        this.inforBank = null;
     }
 
     public Claim() {
@@ -43,29 +44,19 @@ public class Claim {
     }
 
     //set Status for claim
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+
 
     //set insurePerson is PolicyHolder or Dependent
-    public boolean setInsuredPerson(Object obj) {
-        if (insuredPerson == null){
-            if (obj instanceof PolicyHolder){
-                this.insuredPerson = obj;
-            }
-            else if(obj instanceof Dependent){
-                this.insuredPerson = obj;
-            }
+    public boolean setInsuredPerson(Customer obj) {
+
+            this.insuredPerson = obj;
             return true;
-        }
-        else{
-            System.out.println("This claim has already been had an insured person");
-            return false;
-        }
+
+
     }
 
 
-    public boolean setClaimDate(Date newClaimDate) {
+    public boolean setClaimDate(LocalDate newClaimDate) {
         if (claimDate == null) {
             this.claimDate = newClaimDate;
             return true;
@@ -74,8 +65,8 @@ public class Claim {
         return false;
     }
 
-    public boolean setExamDate(Date NewExamDate) {
-        if (claimDate == null){
+    public boolean setExamDate(LocalDate NewExamDate) {
+        if (examDate == null){
             this.examDate = NewExamDate;
             return true;
         }

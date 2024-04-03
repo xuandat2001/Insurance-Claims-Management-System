@@ -2,19 +2,19 @@ package InsuranceCard;
 
 import Customers.Customer;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class InsuranceCard {
     private String cardNum;
     private Customer cardHolder;
     private PolicyOwner policyOwner;
-    private Date expirationDate;
+    private LocalDate expirationDate;
 
-    public InsuranceCard(String cardNum, Customer cardHolder, PolicyOwner policyOwner, Date expirationDate) {
+    public InsuranceCard(String cardNum) {
         this.cardNum = cardNum;
-        this.cardHolder = cardHolder;
-        this.policyOwner = policyOwner;
-        this.expirationDate = expirationDate;
+        this.cardHolder = new Customer() {};
+        this.policyOwner = null;
+        this.expirationDate = null;
     }
 
     public InsuranceCard() {
@@ -28,18 +28,17 @@ public class InsuranceCard {
         return cardNum;
     }
 
-
-    //Set cardHolder for InsuanceCard
-    public boolean setCardHolder(Customer cus) {
-        if (cardHolder == null) {
-            this.cardHolder = cus;
-            return true;
-        }
-        System.out.println("This card has already been owned an customer");
-        return  false;
+    public Customer getCardHolder() {
+        return cardHolder;
     }
 
-    public boolean setExpirationDate(Date NewExpirationDate) {
+    //Set cardHolder for InsuanceCard
+
+
+    public void setCardHolder(Customer cus) {
+                this.cardHolder = cus;
+        }
+    public boolean setExpirationDate(LocalDate NewExpirationDate) {
         if (expirationDate == null) {
             this.expirationDate = NewExpirationDate;
            return true;
@@ -50,7 +49,7 @@ public class InsuranceCard {
 
     //Set PolicyOwner for InsuanceCard
     public boolean setPolicyOwner(PolicyOwner owner) {
-        if (owner == null) {
+        if (policyOwner == null) {
             this.policyOwner = owner;
             return true;
         }
@@ -62,8 +61,8 @@ public class InsuranceCard {
     public String toString() {
         return "InsuranceCard{" +
                 "cardNum='" + cardNum + '\'' +
-                ", cardHolder=" + cardHolder +
-                ", policyOwner=" + policyOwner +
+                ", cardHolder=" + cardHolder.getFullNameCus() +
+                ", policyOwner=" + policyOwner.getFullNamePolicyOwner() +
                 ", expirationDate=" + expirationDate +
                 '}';
     }
