@@ -9,7 +9,9 @@ import Claim.Bank;
 import InsuranceCard.PolicyOwner;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class SystemInsuranceClaim implements ProcessManage {
     private Map<String, Customer> listOfCustomers;
@@ -22,7 +24,7 @@ public class SystemInsuranceClaim implements ProcessManage {
         listOfClaims = new HashMap<String,Claim>();
     }
     public void Test(){
-        PolicyOwner owner = new PolicyOwner("50", "RMIT University", "HCM");
+        /*PolicyOwner owner = new PolicyOwner("50", "RMIT University", "HCM");
         Customer cus1 = new PolicyHolder("01","Ung Xuan Dat");
         Customer cus2 = new Dependent("02","Pham Quang Huy");
         InsuranceCard card1 = new InsuranceCard("0321146326");
@@ -48,7 +50,55 @@ public class SystemInsuranceClaim implements ProcessManage {
         claim2.setCardNum();
         cus1.displayClaim();
 
+*/
+        DataLoader dataLoader = new DataLoader("src/customers.txt");
+        List<String[]>dataList = dataLoader.readDataFromFile();
+        List<Customer> CustomerList = new ArrayList<>();
+        for (String[] data : dataList){
+            String idCus = data[0];
+            String nameCus = data[1];
+            CustomerList.add(new PolicyHolder(idCus,nameCus));
+        }
 
+        for (Customer cus : CustomerList ){
+            System.out.println(cus);
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+
+        dataLoader = new DataLoader("src/insuranceCard.txt");
+        dataList = dataLoader.readDataFromFile();
+        List<InsuranceCard> insuranceCardList = new ArrayList<>();
+        for (String[] data : dataList){
+            String idCard = data[0];
+            insuranceCardList.add(new InsuranceCard(idCard));
+        }
+
+        for (InsuranceCard card : insuranceCardList ){
+            System.out.println(card);
+        }
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+
+        dataLoader = new DataLoader("src/claim.txt");
+        dataList = dataLoader.readDataFromFile();
+        List<Claim> ClaimList = new ArrayList<>();
+        for (String[] data : dataList){
+            String idClaim = data[0];
+            String claimAmount = data[1];
+            ClaimList.add(new Claim(idClaim, Double.parseDouble(claimAmount)));
+        }
+
+        for (Claim claim : ClaimList ){
+            System.out.println(claim);
+        }
     }
     @Override
     public boolean add() {

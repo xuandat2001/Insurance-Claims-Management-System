@@ -21,7 +21,6 @@ public class Claim {
     public Claim(String idClaim, Double claimAmount) {
         this.idClaim = idClaim;
         this.claimAmount = claimAmount;
-
     }
 
     public Claim() {
@@ -44,11 +43,8 @@ public class Claim {
 
     //set insurePerson is PolicyHolder or Dependent
     public boolean setInsuredPerson(Customer obj) {
-
             this.insuredPerson = obj;
             return true;
-
-
     }
 
 
@@ -87,7 +83,7 @@ public class Claim {
                 "idClaim='" + idClaim + '\'' +
                 ", claimDate=" + claimDate +
                 ", cardNumber='" + cardNumber + '\'' +
-                ", insuredPerson=" + insuredPerson.getFullNameCus() +
+                ", insuredPerson=" + insuredPerson+
                 ", examDate=" + examDate +
                 ", listOfDoc='" + listOfDoc + '\'' +
                 ", claimAmount=" + claimAmount +
