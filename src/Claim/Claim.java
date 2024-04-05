@@ -5,7 +5,9 @@ import Customers.Dependent;
 import Customers.PolicyHolder;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Claim {
     private String idClaim;
@@ -21,6 +23,22 @@ public class Claim {
     public Claim(String idClaim, Double claimAmount) {
         this.idClaim = idClaim;
         this.claimAmount = claimAmount;
+    }
+
+    public void setClaimAmount(Double claimAmount) {
+        this.claimAmount = claimAmount;
+    }
+
+    public void setStatus() {
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.isBefore(examDate)){
+            this.status = status.NEW;
+        }else if(currentDate.isAfter(examDate) && currentDate.isBefore(claimDate)){
+            this.status = status.PROCESSING;
+        }else{
+            this.status = status.DONE;
+        }
+
     }
 
     public Claim() {
@@ -47,19 +65,27 @@ public class Claim {
             return true;
     }
 
+    public String getListOfDoc() {
+        if (cardNumber != null) {
+            listOfDoc = idClaim +"_"+ cardNumber + ".pdf";
+        }
+        return listOfDoc;
+    }
 
-    public boolean setClaimDate(LocalDate newClaimDate) {
+    public boolean setClaimDate(String newClaimDate) {
         if (claimDate == null) {
-            this.claimDate = newClaimDate;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.claimDate = LocalDate.parse(newClaimDate, formatter);
             return true;
         }
         System.out.println("Claim Date has already been set");
         return false;
     }
 
-    public boolean setExamDate(LocalDate NewExamDate) {
+    public boolean setExamDate(String NewExamDate) {
         if (examDate == null){
-            this.examDate = NewExamDate;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.examDate = LocalDate.parse(NewExamDate, formatter);
             return true;
         }
         System.out.println("Exam Date has already been set");
@@ -67,15 +93,27 @@ public class Claim {
     }
 
     //Set Bank Information for claim
-    public boolean setInforBank(Bank bank) {
+    public boolean setInforBank() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the Name Bank: ");
+        String nameBank = scanner.nextLine();
+        System.out.println("Enter the Name Owner: ");
+        String nameOwner = scanner.nextLine();
+        System.out.println("Enter the Account Number: ");
+        String AccountNumber = scanner.nextLine();
         if (inforBank == null){
-            this.inforBank = bank;
+            this.inforBank = new Bank(nameBank,nameOwner,AccountNumber);
             return true;
         }
         return false;
     }
     public void setCardNum(){
-        this.cardNumber = insuredPerson.getInsuranceCard().getCardNum();
+        if (insuredPerson.getInsuranceCard() != null) {
+            this.cardNumber = insuredPerson.getInsuranceCard().getCardNum();
+        }
+        else{
+            System.out.println("This customer has not owned InsuranceCard yet");
+        }
     }
     @Override
     public String toString() {

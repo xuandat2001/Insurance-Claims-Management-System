@@ -77,6 +77,14 @@ public  abstract class Customer {
         return true;
     }
 
+    public boolean deleteClaim(Claim claim){
+        if (listOfClaims.contains(claim)){
+            listOfClaims.remove(claim);
+            claim.setInsuredPerson(null);
+            return true;
+        }
+        return false;
+    }
 
     public void displayClaim(){
         for (Claim claim : listOfClaims){

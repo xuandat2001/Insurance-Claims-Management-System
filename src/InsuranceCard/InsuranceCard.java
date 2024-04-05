@@ -3,6 +3,7 @@ package InsuranceCard;
 import Customers.Customer;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class InsuranceCard {
     private String cardNum;
@@ -35,9 +36,10 @@ public class InsuranceCard {
     public void setCardHolder(Customer cus) {
                 this.cardHolder = cus;
         }
-    public boolean setExpirationDate(LocalDate NewExpirationDate) {
+    public boolean setExpirationDate(String NewExpirationDate) {
         if (expirationDate == null) {
-            this.expirationDate = NewExpirationDate;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            this.expirationDate = LocalDate.parse(NewExpirationDate, formatter);
            return true;
         }
         System.out.println("ExpirationDate has already set");

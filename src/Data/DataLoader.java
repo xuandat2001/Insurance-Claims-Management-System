@@ -27,7 +27,7 @@ public class DataLoader {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine().trim(); // Trim the line to remove whitespace
                 if (!line.isEmpty()) {
-                    String[] parts = line.split(",", 2);
+                    String[] parts = line.split(",", 3);
                     dataList.add(parts);
                 }
             }

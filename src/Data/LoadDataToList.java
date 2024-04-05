@@ -6,6 +6,7 @@ import Customers.Dependent;
 import Customers.PolicyHolder;
 import Data.DataLoader;
 import InsuranceCard.InsuranceCard;
+import InsuranceCard.PolicyOwner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -54,6 +55,19 @@ public class  LoadDataToList {
             listOfClaims.add(new Claim(idClaim, Double.parseDouble(claimAmount)));
         }
         return listOfClaims;
+    }
+
+    public static PolicyOwner loadDataPolicyOwner(){
+       PolicyOwner policyOwnerObject = new PolicyOwner();
+        dataLoader = new DataLoader("src/Data/PolicyOwner.txt");
+        dataList = dataLoader.readDataFromFile();
+        for (String[] data : dataList){
+            String policyOwner = data[0];
+            String fullName = data[1];
+            String location = data[2];
+            policyOwnerObject = new PolicyOwner(policyOwner, fullName,location);
+        }
+        return policyOwnerObject;
     }
 
 }
