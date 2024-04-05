@@ -1,39 +1,30 @@
+package Data;
+
 import Claim.Claim;
 import Customers.Customer;
 import Customers.Dependent;
 import Customers.PolicyHolder;
-import Date.Date;
+import Data.DataLoader;
 import InsuranceCard.InsuranceCard;
-import Interface.ProcessManage;
-import Claim.Bank;
-import InsuranceCard.PolicyOwner;
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ArrayList;
 
-public class SystemInsuranceClaim implements ProcessManage {
-    private List<Customer> policyHolderList;
-    private List<Customer> dependentList;
-    private List<InsuranceCard> listOfInsuranceCards;
-    private List<Claim> listOfClaims;
-
-    public SystemInsuranceClaim() {
-        policyHolderList = new ArrayList<Customer>();
-        dependentList = new ArrayList<Customer>();
-        listOfInsuranceCards = new ArrayList<InsuranceCard>();
-        listOfClaims = new ArrayList<Claim>();
-    }
-    public void loadDataToObject(){
-        DataLoader dataLoader = new DataLoader("src/Data/PolicyHolder.txt");
-        List<String[]>dataList = dataLoader.readDataFromFile();
+public class  LoadDataToList {
+    private static DataLoader dataLoader;
+    private static List<String[]>dataList;
+    public static  List<PolicyHolder> loadDataToPolicyHolder(){
+        List<PolicyHolder> policyHolderList = new ArrayList<>();
+        dataLoader = new DataLoader("src/Data/PolicyHolder.txt");
+        dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
             String idCus = data[0];
             String nameCus = data[1];
             policyHolderList.add(new PolicyHolder(idCus,nameCus));
         }
-
+        return policyHolderList;
+    }
+    public static List<Dependent> loadDataToDependent(){
+        List<Dependent> dependentList = new ArrayList<>();
         dataLoader = new DataLoader("src/Data/Dependent.txt");
         dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
@@ -41,14 +32,20 @@ public class SystemInsuranceClaim implements ProcessManage {
             String nameCus = data[1];
             dependentList.add(new Dependent(idCus,nameCus));
         }
-
+        return dependentList;
+    }
+    public static List<InsuranceCard> loadDataToInsuranceCards(){
+        List<InsuranceCard> listOfInsuranceCards = new ArrayList<>();
         dataLoader = new DataLoader("src/Data/insuranceCard.txt");
         dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
             String idCard = data[0];
             listOfInsuranceCards.add(new InsuranceCard(idCard));
         }
-
+        return listOfInsuranceCards;
+    }
+    public static List<Claim> loadDataToClaim(){
+        List<Claim> listOfClaims = new ArrayList<>();
         dataLoader = new DataLoader("src/Data/claim.txt");
         dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
@@ -56,28 +53,7 @@ public class SystemInsuranceClaim implements ProcessManage {
             String claimAmount = data[1];
             listOfClaims.add(new Claim(idClaim, Double.parseDouble(claimAmount)));
         }
-    }
-    @Override
-    public boolean add() {
-        return false;
+        return listOfClaims;
     }
 
-    @Override
-    public boolean update() {
-        return false;
-    }
-
-    @Override
-    public boolean delete() {
-        return false;
-    }
-
-    @Override
-    public void getAll() {
-
-    }
-    @Override
-    public void getOne() {
-
-    }
 }

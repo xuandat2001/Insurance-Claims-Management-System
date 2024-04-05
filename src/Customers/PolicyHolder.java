@@ -10,7 +10,37 @@ public class PolicyHolder extends Customer {
 
     public PolicyHolder(String idCus, String fullNameCus) {
         super(idCus, fullNameCus);
-        this.listOfDependents = listOfDependents;
+         listOfDependents = new ArrayList<Dependent>();
     }
 
+    public PolicyHolder() {
+        listOfDependents = null;
+    }
+
+    public boolean addDepentdent(Dependent dependent){
+        if (dependent.isDepended() && !listOfDependents.contains(dependent)){
+            listOfDependents.add(dependent);
+            dependent.setDepended(false);
+            return true;
+        }
+        System.out.println("this person is depended");
+        return false;
+    }
+    public boolean deleteDepentdent(Dependent dependent){
+        if (listOfDependents.contains(dependent)){
+            listOfDependents.remove(dependent);
+            dependent.setDepended(true);
+            return true;
+        }
+        System.out.println("this person is not in your dependentList");
+        return false;
+    }
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "idCus='" + getIdCus() + '\'' +
+                ", fullNameCus='" + getFullNameCus() + '\'' +
+                "listOfDependents=" + listOfDependents +
+                '}';
+    }
 }

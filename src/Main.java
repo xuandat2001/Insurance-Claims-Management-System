@@ -1,6 +1,9 @@
+import Data.LoadDataToList;
+
 public class Main {
     public static void main(String[] args) {
-       SystemInsuranceClaim sys1 = new SystemInsuranceClaim();
-       sys1.loadDataToObject();
+       MenuSystem menu = new MenuSystem();
+
+       menu.Menu();
     }
 }
