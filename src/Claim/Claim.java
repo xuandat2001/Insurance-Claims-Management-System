@@ -29,17 +29,7 @@ public class Claim {
         this.claimAmount = claimAmount;
     }
 
-    public void setStatus() {
-        LocalDate currentDate = LocalDate.now();
-        if (currentDate.isBefore(examDate)){
-            this.status = status.NEW;
-        }else if(currentDate.isAfter(examDate) && currentDate.isBefore(claimDate)){
-            this.status = status.PROCESSING;
-        }else{
-            this.status = status.DONE;
-        }
 
-    }
 
     public Claim() {
         this.idClaim = null;
@@ -50,6 +40,17 @@ public class Claim {
         this.claimAmount = null;
         this.status = null;
         this.inforBank = null;
+    }
+    public void setStatus() {
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.isBefore(examDate)){
+            this.status = Status.NEW;
+        }else if(currentDate.isAfter(examDate) && currentDate.isBefore(claimDate)){
+            this.status = Status.PROCESSING;
+        }else{
+            this.status = Status.DONE;
+        }
+
     }
 
     public String getIdClaim() {
@@ -70,6 +71,10 @@ public class Claim {
             listOfDoc = idClaim +"_"+ cardNumber + ".pdf";
         }
         return listOfDoc;
+    }
+
+    public Customer getInsuredPerson() {
+        return insuredPerson;
     }
 
     public boolean setClaimDate(String newClaimDate) {

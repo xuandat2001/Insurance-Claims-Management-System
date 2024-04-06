@@ -27,8 +27,8 @@ public class DataLoader {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine().trim(); // Trim the line to remove whitespace
                 if (!line.isEmpty()) {
-                    String[] parts = line.split(",", 3);
-                    dataList.add(parts);
+                    String[] parts = line.split(",", 2); // split the line into two strings by the comma and assign them into a String Array
+                    dataList.add(parts); //add the String Array into List
                 }
             }
             fileScanner.close();

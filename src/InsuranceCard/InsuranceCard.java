@@ -36,19 +36,51 @@ public class InsuranceCard {
     public void setCardHolder(Customer cus) {
                 this.cardHolder = cus;
         }
-    public boolean setExpirationDate(String NewExpirationDate) {
+
+
+
+    /**
+     * set the expirationDate
+     * <p>
+     * Given a newExpirationDate, convert it into LocalDate by DateTimeFormatter and  assign it as the expirationDate.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param newExpirationDate the new date to set
+     * @return true if the assignment is successful, otherwise, return false
+     */
+    public boolean setExpirationDate(String newExpirationDate) {
         if (expirationDate == null) {
+            /*
+                the condition below must satisfy
+                the expirationDate of InsuranceCard must be null
+            */
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            this.expirationDate = LocalDate.parse(NewExpirationDate, formatter);
+            this.expirationDate = LocalDate.parse(newExpirationDate, formatter);
            return true;
         }
         System.out.println("ExpirationDate has already set");
         return false;
     }
 
+
+    /**
+     * set the PolicyOwner
+     * <p>
+     * Given a PolicyOwner , assign it as the policyOwner.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param owner the new PolicyOwner to set
+     * @return true if the assignment is successful, otherwise, return false
+     */
     //Set PolicyOwner for InsuanceCard
     public boolean setPolicyOwner(PolicyOwner owner) {
         if (policyOwner == null) {
+                        /*
+                the condition below must satisfy
+                the policyOwner of InsuranceCard must be null
+            */
             this.policyOwner = owner;
             return true;
         }

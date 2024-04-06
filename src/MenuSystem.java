@@ -4,19 +4,19 @@ import Customers.PolicyHolder;
 import Data.LoadDataToList;
 import InsuranceCard.InsuranceCard;
 import InsuranceCard.PolicyOwner;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuSystem {
+    private static SystemManage sys = new SystemManage();
     public static void menu(){
-        List<PolicyHolder> policyHolderList = LoadDataToList.loadDataToPolicyHolder();
-        List<Dependent>dependentList = LoadDataToList.loadDataToDependent();
-        List<InsuranceCard>insuranceCardList = LoadDataToList.loadDataToInsuranceCards();
-        List<Claim>claimList = LoadDataToList.loadDataToClaim();
-        PolicyOwner policyOwner = LoadDataToList.loadDataPolicyOwner();
-        SystemManage.addInsuranceCardToCustomer(policyHolderList,insuranceCardList);
-
+        List<PolicyHolder> policyHolderList = LoadDataToList.loadDataToPolicyHolder(); //initialize policyHolderList
+        List<Dependent>dependentList = LoadDataToList.loadDataToDependent();//initialize dependentList
+        List<InsuranceCard>insuranceCardList = LoadDataToList.loadDataToInsuranceCards();//initialize insuranceCardList
+        List<Claim>claimList = LoadDataToList.loadDataToClaim();//initialize claimList
+        PolicyOwner policyOwner = LoadDataToList.loadDataPolicyOwner(); //initialize policyOwner
+        sys.addInsuranceCardToCustomer(policyHolderList,insuranceCardList);// add InsuranceCard to Customers
+        sys.setPolicyOwnerToInsuranceCard(insuranceCardList,policyOwner);//set PolicyOwner for InsuranceCard
         while (true){
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to the Admin DashBoard");
@@ -27,8 +27,8 @@ public class MenuSystem {
             System.out.print("Enter your choice: ");
             String choiceAdmin = scanner.nextLine();
             if (choiceAdmin.equals("1")){
-               SystemManage.viewAllPolicyHolder(policyHolderList);
-               SystemManage.viewAllDependent(dependentList);
+                sys.viewAllPolicyHolder(policyHolderList); //view all PolicyHolders
+                sys.viewAllDependent(dependentList);// view all Dependents
                 label:
                 while (true){
                     System.out.println("1: Add Claim");
@@ -40,16 +40,16 @@ public class MenuSystem {
                     choiceAdmin = scanner.nextLine();
                     switch (choiceAdmin) {
                         case "1":
-                            SystemManage.addClaimToCustomer(policyHolderList, claimList);
+                            sys.addClaimToCustomer(policyHolderList, dependentList,claimList);//add claim into Customer's ClaimList
                             break;
                         case "2":
-                            SystemManage.deleteClaimFromCustomer(policyHolderList, claimList);
+                            sys.deleteClaimFromPolicyHolder(policyHolderList, dependentList,claimList);//delete claim into Customer's ClaimList
                             break;
                         case "3":
-                            SystemManage.addDependentToPolicyHolder(policyHolderList, dependentList);
+                            sys.addDependentToPolicyHolder(policyHolderList, dependentList);//add dependent from policyHolder
                             break;
                         case "4":
-                            SystemManage.deleteDependentToPolicyHolder(policyHolderList, dependentList);
+                            sys.deleteDependentToPolicyHolder(policyHolderList, dependentList);//delete dependent from policyHolder
                             break;
                         case "5":
                             break label;
@@ -60,15 +60,14 @@ public class MenuSystem {
                 }
             }
             else if(choiceAdmin.equals("2")){
-                SystemManage.viewAllInsuranceCard(insuranceCardList);
+                sys.viewAllInsuranceCard(insuranceCardList);
                 System.out.println("1: Update InsuranceCard");
                 System.out.println("2: Back to Main Menu");
                 System.out.print("Enter your choice: ");
                 choiceAdmin = scanner.nextLine();
                 while (true){
                     if(choiceAdmin.equals("1")){
-                        SystemManage.setPolicyOwnerToInsuranceCard(insuranceCardList,policyOwner);//set PolicyOwner for InsuranceCard
-                        SystemManage.setExpirationDate(insuranceCardList); //set ExpirationDate for InsuranceCard
+                        sys.setExpirationDate(insuranceCardList); //set ExpirationDate for InsuranceCard
                         break;
                     }
                     else if(choiceAdmin.equals("2")){
@@ -82,7 +81,7 @@ public class MenuSystem {
             else if(choiceAdmin.equals("3")){
                 System.out.println("List Id of Claim: ");
                 for (Claim claim:claimList){
-                    System.out.println(claim.getIdClaim());
+                    System.out.println(claim.getIdClaim());// get id of all claims
                 }
                 System.out.println("1: Update Specific Claim");
                 System.out.println("2: View All Claims");
@@ -92,15 +91,15 @@ public class MenuSystem {
                 choiceAdmin = scanner.nextLine();
                 while (true){
                     if(choiceAdmin.equals("1")){
-                        SystemManage.updateClaim(claimList);//set PolicyOwner for InsuranceCard
+                        sys.updateClaim(claimList);//set PolicyOwner for InsuranceCard
                         break;
                     }
                     else if(choiceAdmin.equals("2")){
-                        SystemManage.getAllClaims(claimList);
+                        sys.getAllClaims(claimList);// view all Claims
                         break;
                     }
                     else if(choiceAdmin.equals("3")){
-                        SystemManage.getOneClaim(claimList);
+                        sys.getOneClaim(claimList);// view one Claim
                         break;
                     }
                     else if(choiceAdmin.equals("4")){

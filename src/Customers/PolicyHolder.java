@@ -17,17 +17,51 @@ public class PolicyHolder extends Customer {
         listOfDependents = null;
     }
 
+
+
+    /**
+     * add the dependent to the customer's dependentList
+     * <p>
+     * Given a dependent, set its isDepended is true.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param dependent the claim to add
+     * @return true if the assignment is successful, otherwise, return false
+     */
     public boolean addDepentdent(Dependent dependent){
-        if (dependent.isDepended() && !listOfDependents.contains(dependent)){
-            listOfDependents.add(dependent);
-            dependent.setDepended(false);
+        if (!dependent.isDepended() && !listOfDependents.contains(dependent)){
+            /*
+                two conditions below must satisfy
+                the dependent's isDepended() = false.
+                the dependent is not contained in the PolicyHolder's listOfDependent
+            */
+            dependent.setInsuranceCard(this.getInsuranceCard());
+            dependent.setDepended(true);
             return true;
         }
         System.out.println("this person is depended");
         return false;
     }
+
+
+
+    /**
+     * delete the dependent to the customer's dependentList
+     * <p>
+     * Given a dependent, set its isDepended is true.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param dependent the claim to delete
+     * @return true if the assignment is successful, otherwise, return false
+     */
     public boolean deleteDepentdent(Dependent dependent){
         if (listOfDependents.contains(dependent)){
+            /*
+                the condition below must satisfy
+                the dependent is contained in the PolicyHolder's listOfDependent
+            */
             listOfDependents.remove(dependent);
             dependent.setDepended(true);
             return true;

@@ -44,32 +44,34 @@ public  abstract class Customer {
     public InsuranceCard getInsuranceCard() {
         return insuranceCard;
     }
-    public boolean isOwnedInsuranceCard(){
-        return this.getInsuranceCard() != null;
-    }
-
-
 
     // Set insuranceCard for Customer
     public boolean setInsuranceCard(InsuranceCard newInsuranceCard) {
-            if (!isOwnedInsuranceCard() && newInsuranceCard.getCardHolder() == null) {
-                this.insuranceCard = newInsuranceCard;
-                newInsuranceCard.setCardHolder(this);
-                return true;
-            }
-            System.out.println("here");
-            return false;
-
+        this.insuranceCard = newInsuranceCard;
+        newInsuranceCard.setCardHolder(this); //set back CardHolder of newInsuranceCard
+        return true;
     }
 
 
-
-    public void displayDetailInsuranceCard(){
-        System.out.println(insuranceCard);
-    }
-
+    /**
+     * add the claim to the customer's claimList
+     * <p>
+     * Given a claim, assign the current customer as its insuredPerson.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param claim the claim to add
+     * @return true if the assignment is successful, otherwise, return false
+     */
     public boolean addClaim(Claim claim){
-        if (listOfClaims.contains(claim)){
+        if (listOfClaims.contains(claim) && claim.getInsuredPerson() != null && this.getInsuranceCard() == null){
+             /*
+                three conditions below must satisfy
+                the ClaimList must not contain claim
+                the InsuredPerson of claim must be null
+                the InsuranceCard of this customer must not Null
+            */
+            System.out.println("Something Wrong");
             return false;
         }
         listOfClaims.add(claim);
@@ -77,8 +79,24 @@ public  abstract class Customer {
         return true;
     }
 
+
+
+    /**
+     * delete the claim from the customer's claimList
+     * <p>
+     * Given a claim, assign its insuredPerson as null.
+     * If the assignment is successful, return true,
+     * otherwise, return false
+     * </p>
+     * @param claim the claim to delete
+     * @return true if the assignment is successful, otherwise, return false
+     */
     public boolean deleteClaim(Claim claim){
         if (listOfClaims.contains(claim)){
+            /*
+                the condition below must satisfy
+                the ClaimList must contain the claim
+            */
             listOfClaims.remove(claim);
             claim.setInsuredPerson(null);
             return true;
@@ -86,6 +104,8 @@ public  abstract class Customer {
         return false;
     }
 
+
+    //Display all Claim of Customer
     public void displayClaim(){
         for (Claim claim : listOfClaims){
             System.out.println(claim);

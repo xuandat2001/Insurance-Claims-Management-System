@@ -15,7 +15,7 @@ public class  LoadDataToList {
     private static List<String[]>dataList;
     public static  List<PolicyHolder> loadDataToPolicyHolder(){
         List<PolicyHolder> policyHolderList = new ArrayList<>();
-        dataLoader = new DataLoader("src/Data/PolicyHolder.txt");
+        dataLoader = new DataLoader("src/Data/PolicyHolder.txt"); // initialize dataLoader
         dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
             String idCus = data[0];
