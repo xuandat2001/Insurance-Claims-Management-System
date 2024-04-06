@@ -91,11 +91,13 @@ public  abstract class Customer {
             System.out.println(claim);
         }
     }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "idCus='" + idCus + '\'' +
                 ", fullNameCus='" + fullNameCus + '\'' +
+                ", insuranceCard=" + insuranceCard.getCardNum() +
                 '}';
     }
 }

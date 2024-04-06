@@ -4,12 +4,28 @@ import Customers.PolicyHolder;
 import InsuranceCard.InsuranceCard;
 import InsuranceCard.PolicyOwner;
 import Interface.ProcessManage;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class SystemManage implements ProcessManage {
     private static Scanner scanner = new Scanner(System.in);
+
+    public static void viewAllPolicyHolder(List<PolicyHolder>policyHolderList){
+        for (PolicyHolder policyHolder : policyHolderList ){
+            System.out.println(policyHolder);
+        }
+    }
+    public static void viewAllDependent(List<Dependent>dependentList){
+        for (Dependent dependent : dependentList ){
+            System.out.println(dependent);
+        }
+    }
+    public static void viewAllInsuranceCard(List<InsuranceCard>insuranceCardList){
+        for (InsuranceCard card :insuranceCardList  ){
+            System.out.println(card);
+        }
+    }
+
     public static void addDependentToPolicyHolder(List<PolicyHolder>policyHolderList, List<Dependent>dependentList){
         System.out.print("Please input the id of the PolicyHolder: ");
         String policyHolderId = scanner.nextLine();
@@ -20,7 +36,9 @@ public class SystemManage implements ProcessManage {
                 for (Dependent dependent: dependentList){
                     if (dependent.getIdCus().equals(dependentId)){
                         policyHolder.addDepentdent(dependent);
+                        System.out.println("Add Successfully");
                         System.out.println(policyHolder);
+
                         return;
                     }
                 }
@@ -39,6 +57,7 @@ public class SystemManage implements ProcessManage {
                 for (Dependent dependent: dependentList){
                     if (dependent.getIdCus().equals(dependentId)){
                         policyHolder.deleteDepentdent(dependent);
+                        System.out.println("Remove Successfully");
                         System.out.println(policyHolder);
                         return;
                     }
@@ -47,64 +66,15 @@ public class SystemManage implements ProcessManage {
         }
     }
     public static void addInsuranceCardToCustomer(List<PolicyHolder>policyHolderList, List<InsuranceCard>insuranceCardList){
-        System.out.print("Please input the id of the PolicyHolder: ");
-        String policyHolderId = scanner.nextLine();
-        for (PolicyHolder policyHolder :  policyHolderList){
-            if (policyHolder.getIdCus().equals(policyHolderId)){
-                System.out.print("Please input the cardNumber: ");
-                String cardId = scanner.nextLine();
-                for (InsuranceCard card: insuranceCardList){
-                    if (card.getCardNum().equals(cardId)){
-                        policyHolder.setInsuranceCard(card);
-                        policyHolder.displayDetailInsuranceCard();
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
-
-    public static void addClaimToCustomer(List<PolicyHolder>policyHolderList, List<Claim>claimList){
-        System.out.print("Please input the id of the PolicyHolder: ");
-        String policyHolderId = scanner.nextLine();
-        for (PolicyHolder policyHolder :  policyHolderList){
-            if (policyHolder.getIdCus().equals(policyHolderId)){
-                System.out.print("Please input the ClaimId: ");
-                String claimId = scanner.nextLine();
-                for (Claim claim: claimList){
-                    if (claim.getIdClaim().equals(claimId)){
-                        policyHolder.addClaim(claim);
-                        claim.setCardNum();
-                        claim.getListOfDoc();
-                        policyHolder.displayClaim();
-                        return;
-                    }
-                }
-            }
-        }
-    }
-
-    public static void removeClaimToCustomer(List<PolicyHolder>policyHolderList, List<Claim>claimList){
-        System.out.print("Please input the id of the PolicyHolder: ");
-        String policyHolderId = scanner.nextLine();
-        for (PolicyHolder policyHolder :  policyHolderList){
-            if (policyHolder.getIdCus().equals(policyHolderId)){
-                System.out.print("Please input the ClaimId: ");
-                String claimId = scanner.nextLine();
-                for (Claim claim: claimList){
-                    if (claim.getIdClaim().equals(claimId)){
-                        policyHolder.deleteClaim(claim);
-                        policyHolder.displayClaim();
-                        return;
-                    }
-                }
-            }
+        int size = policyHolderList.size();
+        for (int i = 0; i < size; i++){
+            policyHolderList.get(i).setInsuranceCard(insuranceCardList.get(i));
         }
     }
     public static void setPolicyOwnerToInsuranceCard(List<InsuranceCard>insuranceCardList, PolicyOwner policyOwner){
         for (InsuranceCard card: insuranceCardList){
             card.setPolicyOwner(policyOwner);
+            break;
         }
     }
     public static void setExpirationDate(List<InsuranceCard>insuranceCardList){
@@ -115,101 +85,92 @@ public class SystemManage implements ProcessManage {
             String cardId = scanner.nextLine();
             if (card.getCardNum().equals(cardId)){
                 card.setExpirationDate(newDate);
+                System.out.println("Update Successfully");
                 System.out.println(card);
+                return;
             }
         }
     }
 
-    public static void setClaimDate(List<Claim>claimList){
-        System.out.print("Please input the date with format dd/MM/yyyy: ");
-        String newDate= scanner.nextLine();
-        for (Claim claim: claimList){
-            System.out.print("Please input the Claim ID: ");
-            String claimId = scanner.nextLine();
-            if (claim.getIdClaim().equals(claimId)){
-                claim.setClaimDate(newDate);
-                System.out.println(claim);
-                break;
+    public static void addClaimToCustomer(List<PolicyHolder> policyHolderList, List<Claim> claimList) {
+
+        System.out.print("Please input the id of the PolicyHolder( access to file PolicyHolder.txt to get PolicyHolderID): ");
+        String policyHolderId = scanner.nextLine();
+        for (PolicyHolder policyHolder :  policyHolderList){
+            if (policyHolder.getIdCus().equals(policyHolderId)){
+                System.out.print("Please input the ClaimId( access to file claim.txt to get claimID): ");
+                String claimId = scanner.nextLine();
+                for (Claim claim: claimList){
+                    if (claim.getIdClaim().equals(claimId)){
+                        policyHolder.addClaim(claim);
+                        claim.setCardNum();
+                        claim.getListOfDoc();
+                        policyHolder.displayClaim();
+                        System.out.println("Add Successfully");
+                    }
+                }
             }
         }
     }
-    public static void setExamDate(List<Claim>claimList){
-        System.out.print("Please input the date with format dd/MM/yyyy: ");
-        String newDate= scanner.nextLine();
-        for (Claim claim: claimList){
-            System.out.print("Please input the Claim ID: ");
-            String claimId = scanner.nextLine();
+
+
+    public static void updateClaim(List<Claim>claimList) {
+        System.out.print("Please input the ClaimId( access to file insuranceCard.txt to get insuranceCardID): ");
+        String claimId = scanner.nextLine();
+        for (Claim claim: claimList) {
             if (claim.getIdClaim().equals(claimId)){
-                claim.setExamDate(newDate);
-                System.out.println(claim);
-                break;
-            }
-        }
-    }
-    public static void setBank(List<Claim>claimList){
-        for (Claim claim: claimList){
-            System.out.print("Please input the Claim ID: ");
-            String claimId = scanner.nextLine();
-            if (claim.getIdClaim().equals(claimId)){
-                claim.setInforBank();
-                System.out.println(claim);
-                break;
-            }
-        }
-    }
-    public static void setStatus(List<Claim>claimList){
-        for (Claim claim: claimList){
-            System.out.print("Please input the Claim ID: ");
-            String claimId = scanner.nextLine();
-            if (claim.getIdClaim().equals(claimId)){
+                System.out.print("Please input the Claim date with format dd/MM/yyyy: ");
+                String claimDate= scanner.nextLine();
+                claim.setClaimDate(claimDate);
+
+                System.out.print("Please input the Exam date with format dd/MM/yyyy: ");
+                String examDate= scanner.nextLine();
+                claim.setExamDate(examDate);
                 claim.setStatus();
+
+                claim.setInforBank();
+
+                System.out.println("Update Successfully");
                 System.out.println(claim);
-                break;
+            }
+
+        }
+    }
+
+    public static void deleteClaimFromCustomer(List<PolicyHolder> policyHolderList, List<Claim> claimList) {
+        System.out.print("Please input the id of the PolicyHolder: ");
+        String policyHolderId = scanner.nextLine();
+        for (PolicyHolder policyHolder :  policyHolderList){
+            if (policyHolder.getIdCus().equals(policyHolderId)){
+                System.out.print("Please input the ClaimId: ");
+                String claimId = scanner.nextLine();
+                for (Claim claim: claimList){
+                    if (claim.getIdClaim().equals(claimId)){
+                        policyHolder.deleteClaim(claim);
+                        System.out.println("Remove Successfully");
+                        System.out.println(policyHolder);
+                    }
+                }
             }
         }
     }
 
-    public static void setClaimAmount(List<Claim>claimList){
-        for (Claim claim: claimList){
-            System.out.print("Please input the Claim ID: ");
-            String claimId = scanner.nextLine();
+
+    public static  void  getAllClaims(List<Claim>claimList) {
+        for (Claim claim : claimList ){
+            System.out.println(claim);
+        }
+    }
+
+
+    public static void getOneClaim(List<Claim>claimList) {
+        System.out.print("Please input the id of the Claim: ");
+        String claimId = scanner.nextLine();
+        for (Claim claim : claimList){
             if (claim.getIdClaim().equals(claimId)){
-                System.out.print("Please input the new Claim Amount: ");
-                double claimAmount = scanner.nextDouble();
-                claim.setClaimAmount(claimAmount);
                 System.out.println(claim);
-                break;
             }
         }
-    }
-
-
-
- 
-
-    @Override
-    public boolean add() {
-
-        return false;
-    }
-
-    @Override
-    public boolean update() {
-        return false;
-    }
-
-    @Override
-    public boolean delete() {
-        return false;
-    }
-
-    @Override
-    public void getAll() {
-
-    }
-
-    @Override
-    public void getOne() {
 
     }
 }

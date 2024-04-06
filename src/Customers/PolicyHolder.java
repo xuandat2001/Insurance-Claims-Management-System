@@ -37,9 +37,10 @@ public class PolicyHolder extends Customer {
     }
     @Override
     public String toString() {
-        return "Customer{" +
+        return "PolicyHolder{" +
                 "idCus='" + getIdCus() + '\'' +
                 ", fullNameCus='" + getFullNameCus() + '\'' +
+                ", insuranceCard=" + getInsuranceCard().getCardNum() +'\''+
                 "listOfDependents=" + listOfDependents +
                 '}';
     }

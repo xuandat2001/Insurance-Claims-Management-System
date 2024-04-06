@@ -60,7 +60,7 @@ public class InsuranceCard {
     public String toString() {
         return "InsuranceCard{" +
                 "cardNum='" + cardNum + '\'' +
-                ", cardHolder=" + cardHolder +
+                ", cardHolder=" + cardHolder.getFullNameCus() +
                 ", policyOwner=" + policyOwner +
                 ", expirationDate=" + expirationDate +
                 '}';

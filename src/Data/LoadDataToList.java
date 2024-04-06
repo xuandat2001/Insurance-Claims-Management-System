@@ -62,10 +62,9 @@ public class  LoadDataToList {
         dataLoader = new DataLoader("src/Data/PolicyOwner.txt");
         dataList = dataLoader.readDataFromFile();
         for (String[] data : dataList){
-            String policyOwner = data[0];
-            String fullName = data[1];
-            String location = data[2];
-            policyOwnerObject = new PolicyOwner(policyOwner, fullName,location);
+            String fullName = data[0];
+            String location = data[1];
+            policyOwnerObject = new PolicyOwner(fullName,location);
         }
         return policyOwnerObject;
     }
