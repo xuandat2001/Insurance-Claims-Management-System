@@ -180,7 +180,7 @@ public class SystemManage implements ClaimProcessManager {
 
     //deleteClaimFromPolicyHolder
     @Override
-    public void deleteClaimFromPolicyHolder(List<PolicyHolder> policyHolderList,List<Dependent> dependentList, List<Claim> claimList) {
+    public void deleteClaimFromCustomer(List<PolicyHolder> policyHolderList,List<Dependent> dependentList, List<Claim> claimList) {
         String cusId;
         System.out.print("Please input the id of the Customer: ");
         cusId = scanner.nextLine();

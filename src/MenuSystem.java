@@ -45,7 +45,7 @@ public class MenuSystem {
                             sys.addClaimToCustomer(policyHolderList, dependentList,claimList);//add claim into Customer's ClaimList
                             break;
                         case "2":
-                            sys.deleteClaimFromPolicyHolder(policyHolderList, dependentList,claimList);//delete claim into Customer's ClaimList
+                            sys.deleteClaimFromCustomer(policyHolderList, dependentList,claimList);//delete claim into Customer's ClaimList
                             break;
                         case "3":
                             sys.addDependentToPolicyHolder(policyHolderList, dependentList);//add dependent from policyHolder
