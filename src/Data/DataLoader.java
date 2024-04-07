@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class DataLoader {
     private String fileName;
 

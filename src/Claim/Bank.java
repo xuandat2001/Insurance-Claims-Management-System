@@ -1,5 +1,7 @@
 package Claim;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class Bank {
 
     private String nameBank;

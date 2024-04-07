@@ -1,10 +1,9 @@
 package Customers;
-
-import InsuranceCard.InsuranceCard;
-
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class PolicyHolder extends Customer {
     private List<Dependent> listOfDependents;
 
@@ -36,6 +35,7 @@ public class PolicyHolder extends Customer {
                 the dependent's isDepended() = false.
                 the dependent is not contained in the PolicyHolder's listOfDependent
             */
+            listOfDependents.add(dependent);
             dependent.setInsuranceCard(this.getInsuranceCard());
             dependent.setDepended(true);
             return true;

@@ -1,14 +1,12 @@
 package Claim;
 
 import Customers.Customer;
-import Customers.Dependent;
-import Customers.PolicyHolder;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class Claim {
     private String idClaim;
     private LocalDate claimDate;

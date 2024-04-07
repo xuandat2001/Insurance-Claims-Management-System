@@ -6,7 +6,9 @@ import InsuranceCard.InsuranceCard;
 import InsuranceCard.PolicyOwner;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class MenuSystem {
     private static SystemManage sys = new SystemManage();
     public static void menu(){
@@ -49,7 +51,7 @@ public class MenuSystem {
                             sys.addDependentToPolicyHolder(policyHolderList, dependentList);//add dependent from policyHolder
                             break;
                         case "4":
-                            sys.deleteDependentToPolicyHolder(policyHolderList, dependentList);//delete dependent from policyHolder
+                            sys.deleteDependentToCustomer(policyHolderList, dependentList);//delete dependent from policyHolder
                             break;
                         case "5":
                             break label;

@@ -1,5 +1,7 @@
 package InsuranceCard;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class PolicyOwner {
     private String fullNamePolicyOwner;
     private String location;

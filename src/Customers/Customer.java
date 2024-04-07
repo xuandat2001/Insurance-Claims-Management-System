@@ -4,7 +4,9 @@ import InsuranceCard.InsuranceCard;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public  abstract class Customer {
     private String idCus; //with the format c-numbers; 7 numbers
     private String fullNameCus;
@@ -48,7 +50,9 @@ public  abstract class Customer {
     // Set insuranceCard for Customer
     public boolean setInsuranceCard(InsuranceCard newInsuranceCard) {
         this.insuranceCard = newInsuranceCard;
-        newInsuranceCard.setCardHolder(this); //set back CardHolder of newInsuranceCard
+        if (newInsuranceCard != null){
+            newInsuranceCard.setCardHolder(this);
+        }//set back CardHolder of newInsuranceCard
         return true;
     }
 

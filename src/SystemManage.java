@@ -6,7 +6,9 @@ import InsuranceCard.PolicyOwner;
 import Interface.ClaimProcessManager;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class SystemManage implements ClaimProcessManager {
     private static Scanner scanner = new Scanner(System.in);
 
@@ -55,7 +57,7 @@ public class SystemManage implements ClaimProcessManager {
     }
 
     //deleteDependentToPolicyHolder
-    public void deleteDependentToPolicyHolder(List<PolicyHolder>policyHolderList, List<Dependent>dependentList){
+    public void deleteDependentToCustomer(List<PolicyHolder>policyHolderList, List<Dependent>dependentList){
         System.out.print("Please input the id of the PolicyHolder: ");
         String policyHolderId = scanner.nextLine();
         for (PolicyHolder policyHolder :  policyHolderList){
@@ -65,6 +67,7 @@ public class SystemManage implements ClaimProcessManager {
                 for (Dependent dependent: dependentList){
                     if (dependent.getIdCus().equals(dependentId)){
                         policyHolder.deleteDepentdent(dependent);
+                        dependent.setInsuranceCard(null);
                         System.out.println("Remove Successfully");
                         System.out.println(policyHolder);
                         System.out.println(dependent);

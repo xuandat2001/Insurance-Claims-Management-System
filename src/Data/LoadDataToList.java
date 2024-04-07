@@ -9,7 +9,9 @@ import InsuranceCard.InsuranceCard;
 import InsuranceCard.PolicyOwner;
 import java.util.List;
 import java.util.ArrayList;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class  LoadDataToList {
     private static DataLoader dataLoader;
     private static List<String[]>dataList;

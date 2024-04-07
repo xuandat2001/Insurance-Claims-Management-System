@@ -4,7 +4,9 @@ import Customers.Customer;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * @author <Ung Xuan Dat - s3932156>
+ */
 public class InsuranceCard {
     private String cardNum;
     private Customer cardHolder;
