@@ -51,7 +51,7 @@ public class MenuSystem {
                             sys.addDependentToPolicyHolder(policyHolderList, dependentList);//add dependent from policyHolder
                             break;
                         case "4":
-                            sys.deleteDependentToCustomer(policyHolderList, dependentList);//delete dependent from policyHolder
+                            sys.deleteDependentFromPolicyHolder(policyHolderList, dependentList);//delete dependent from policyHolder
                             break;
                         case "5":
                             break label;

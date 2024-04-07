@@ -57,7 +57,7 @@ public class SystemManage implements ClaimProcessManager {
     }
 
     //deleteDependentToPolicyHolder
-    public void deleteDependentToCustomer(List<PolicyHolder>policyHolderList, List<Dependent>dependentList){
+    public void deleteDependentFromPolicyHolder(List<PolicyHolder>policyHolderList, List<Dependent>dependentList){
         System.out.print("Please input the id of the PolicyHolder: ");
         String policyHolderId = scanner.nextLine();
         for (PolicyHolder policyHolder :  policyHolderList){
